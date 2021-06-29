@@ -1,34 +1,43 @@
-from pydantic import BaseModel, validator
-from datetime import datetime
-from typing import Optional, List, Any, Dict, Set
+from .data import TaskModel
+from typing import Any, TypeVar, Generic, Optional, List
+from ..interfaces import ICrud, ID, OBJ
+from abc import ABC, abstractmethod
 
 
-class TaskModel(BaseModel):
-    id: int
-    project_id: int
-    section_id: int = 0
-    title: str
-    description: Optional[str]
-    completion_date: datetime
-    creation_date: datetime
-    due_date: datetime
-    archived = False
+class Repository(ICrud[ID, OBJ], ABC):
+    @abstractmethod
+    def configure(self):
+        """
+        Here is where the Repository's credentials, authentication and
+        other procedures are executed
+        """
 
-    class Config:
-        json_encoders = {
-            datetime: lambda v: v.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-        }
 
-    @validator('priority', pre=True)
-    def priority_validate(cls, v):
-        return int(v.split(' ')[1])
+class Service(ICrud[ID, OBJ], ABC):
+    def __init__(self, repository: Repository):
+        self.__repository = repository
+        self.__repository.configure()
 
-    @validator(['creation_date', 'due_date'], pre=True)
-    def due_date_validate(cls, v):
-        # June 2, 2021 at 08:32PM
-        return datetime.strptime(v, '%B %m, %Y')
+    @property
+    def repository(self):
+        return self.__repository
 
-    @validator('completion_date', pre=True)
-    def completed_at_validate(cls, v):
-        # June 2, 2021 at 08:32PM
-        return datetime.strptime(v, '%B %m, %Y at %I:%M%p')
+    def get_by_id(self, id: ID) -> Optional[OBJ]:
+        """ Get an element using its unique identification """
+        return self.repository.get_by_id(id)
+
+    def get_all(self) -> Optional[List[OBJ]]:
+        """ Get all elements available """
+        return self.repository.get_all(id)
+
+    def create(self, data: OBJ) -> bool:
+        """ Get all elements available """
+        return self.repository.create(data)
+
+    def update(self, data: OBJ) -> Optional[OBJ]:
+        """ Get all elements available """
+        return self.repository.update(data)
+
+    def delete(self, id: ID) -> bool:
+        """ Get all elements available """
+        return self.repository.delete(id)
