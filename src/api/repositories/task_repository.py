@@ -14,7 +14,8 @@ class TaskRepository(Repository[int, TaskModel]):
         self.__data: Dict[int, TaskModel] = dict()
 
     def configure(self):
-        tmp_data = json.load(get_data_file('tasks').open('r'))
+        with get_data_file('tasks').open('r') as file:
+            tmp_data = json.load(file)
         for obj in tmp_data:
             obj = TaskModel(**obj)
             self.__data[obj.id] = obj

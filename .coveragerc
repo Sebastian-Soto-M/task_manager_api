@@ -1,0 +1,6 @@
+[run]
+  source=
+     src/
+     tests/
+  omit=
+     /home/snsm/.config/virtualenvs/automate_productivity/
