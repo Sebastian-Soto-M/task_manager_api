@@ -29,7 +29,8 @@ class TaskRepository(Repository[int, TaskModel]):
 
     def create(self, data: TaskModel) -> bool:
         """ Get all elements available """
-        return self.__data.append(data.id, data)
+        self.__data[data.id] = data
+        return True
 
     def update(self, data: TaskModel) -> Optional[TaskModel]:
         """ Get all elements available """
@@ -37,5 +38,5 @@ class TaskRepository(Repository[int, TaskModel]):
 
     def delete(self, id: int) -> bool:
         """ Get all elements available """
-        self.repository.pop(id)
+        self.__data.pop(id)
         return True

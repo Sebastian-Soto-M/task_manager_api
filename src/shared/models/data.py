@@ -9,10 +9,10 @@ class TaskModel(BaseModel):
     section_id: int = 0
     title: str
     description: Optional[str]
-    completion_date: datetime
-    creation_date: datetime
-    priority: int
-    due_date: datetime
+    creation_date: datetime = datetime.utcnow()
+    completion_date: Optional[datetime]
+    due_date: Optional[datetime]
+    priority: int = 0
     archived = False
 
     class Config:

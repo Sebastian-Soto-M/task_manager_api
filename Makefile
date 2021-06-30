@@ -15,7 +15,7 @@ install:
 	$(PYTHON) -m pip install -r requirements.txt
 
 test:
-	$(PYTHON) -m tests -v
+	coverage -m tests -v
 
 run:
 	$(PYTHON) -m src
