@@ -1,8 +1,8 @@
 from unittest import TestCase, main, skip
-from src.api import TaskService, TaskRepository
+
+from src.api import TaskRepository, TaskService
+from src.shared.models import Repository, Service
 from src.shared.models.data import TaskModel
-from src.shared.models import Service
-from src.shared.models import Repository
 
 
 class TestTaskRepository(TestCase):

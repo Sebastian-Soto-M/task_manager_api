@@ -1,6 +1,7 @@
+from typing import List, Optional
+
 from src.shared.interfaces import ICrud
-from src.shared.models import TaskModel, Service, Repository
-from typing import Optional, List
+from src.shared.models import Repository, Service, TaskModel
 
 
 class TaskService(Service[int, TaskModel]):

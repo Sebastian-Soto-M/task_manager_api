@@ -1,7 +1,8 @@
-from .data import TaskModel
-from typing import Any, TypeVar, Generic, Optional, List
-from ..interfaces import ICrud, ID, OBJ
 from abc import ABC, abstractmethod
+from typing import Any, Generic, List, Optional, TypeVar
+
+from ..interfaces import ID, OBJ, ICrud
+from .data import TaskModel
 
 
 class Repository(ICrud[ID, OBJ], ABC):

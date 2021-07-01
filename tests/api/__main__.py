@@ -1,5 +1,6 @@
 from unittest import TestSuite, TextTestRunner, makeSuite
 
+
 def get_suite() -> TestSuite:
     suite = TestSuite()
     selected_suite = CLI_OPTS.suite

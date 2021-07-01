@@ -1,6 +1,6 @@
-from src.api import TaskService, TaskRepository
-from src.shared.models.data import TaskModel
+from src.api import TaskRepository, TaskService
 from src.shared.models import Service
+from src.shared.models.data import TaskModel
 
 
 def main(api: Service):

@@ -25,3 +25,7 @@ clean:
 
 test-report:
 	coverage report
+
+test-html-report:
+	coverage html
+	xdg-open /home/snsm/documents/code/automation/packages/task_manager/htmlcov/index.html

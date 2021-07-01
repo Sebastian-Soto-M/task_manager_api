@@ -1,6 +1,6 @@
 import logging
-from itertools import chain
 import sys
+from itertools import chain
 from typing import Dict, List
 from unittest import TestCase
 

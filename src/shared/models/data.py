@@ -1,6 +1,7 @@
-from pydantic import BaseModel, validator
 from datetime import datetime
-from typing import Optional, List, Any, Dict, Set
+from typing import Any, Dict, List, Optional, Set
+
+from pydantic import BaseModel, validator
 
 
 class TaskModel(BaseModel):

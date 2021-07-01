@@ -1,12 +1,8 @@
-from src.shared.models import TaskModel, Service, Repository
-from src.shared.utils import get_data_file
 import json
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, List, Optional, Tuple
 
-
-def parse_task(data: dict) -> Tuple[int, TaskModel]:
-    task = TaskModel(**data)
-    return (task.id, task)
+from src.shared.models import Repository, Service, TaskModel
+from src.shared.utils import get_data_file
 
 
 class TaskRepository(Repository[int, TaskModel]):
