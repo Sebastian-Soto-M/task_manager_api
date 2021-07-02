@@ -15,7 +15,6 @@ install:
 
 test:
 	coverage run -m unittest
-	@test-report
 
 run:
 	$(PYTHON) -m src
@@ -24,8 +23,10 @@ clean:
 	fdfind -I cache . -x rm -rf
 
 test-report:
+	@test
 	coverage report
 
 test-html-report:
+	@test
 	coverage html
 	xdg-open /home/snsm/documents/code/automation/packages/task_manager/htmlcov/index.html

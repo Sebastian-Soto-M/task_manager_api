@@ -1,7 +1,10 @@
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Callable, Dict, Optional
 
 from pydantic import BaseModel, validator
+
+date_to_str: Callable[[datetime], str] = lambda v: v.strftime(
+    '%Y-%m-%dT%H:%M:%S.%fZ')
 
 
 class TaskModel(BaseModel):
@@ -17,12 +20,12 @@ class TaskModel(BaseModel):
     archived = False
 
     class Config:
-        json_encoders = {
-            datetime: lambda v: v.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        json_encoders: Dict[type, Any] = {
+            datetime: date_to_str
         }
 
     @validator('priority', pre=True)
-    def priority_validate(cls, v):
+    def priority_validate(cls, v: Any) -> int:
         return int(v.split(' ')[1]) if isinstance(v, str) else v
 
     # @validator('creation_date', 'due_date', pre=True)
